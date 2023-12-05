@@ -1,9 +1,9 @@
-## Advent Of Code
+## Advent Of Code 👨‍💻 🎄
 
-Tested using Python 3.12.X
+Tested using Python 🐍 - 3.12.X 
 
-### Installing Dependancies
-- Install
+### Installing Dependencies ⛓️
+- Install 
     ```bash
     pip install -r requirements.txt
     ```
