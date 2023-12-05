@@ -16,7 +16,7 @@ def fetchData(day: int, year: int = 2023, testData=False) -> list[str]:
     def saveToCache(data: str | list[str], cachePath: str) -> None:
         f = open(cachePath, "x")
         if isinstance(data, list):
-            f.write("\n".join(data))
+            f.writelines("\n".join(data))
         else:
             f.write(data)
         f.close()
@@ -24,7 +24,7 @@ def fetchData(day: int, year: int = 2023, testData=False) -> list[str]:
 
     def fetchFromCache(cachePath: str) -> list[str]:
         f = open(cachePath, "r")
-        cachedData = f.readlines()
+        cachedData = f.read().splitlines()
         f.close()
         return cachedData
 
@@ -46,11 +46,13 @@ def fetchData(day: int, year: int = 2023, testData=False) -> list[str]:
             cookies={"session": sessionCookie},
             timeout=3)
         print("Fetched data from source.")
-        return response.text.split("\n")
+        return response.text.strip().split("\n")
+
     if testData:
         if checkIfCacheExists(testDataCachePath):
             return fetchFromCache(testDataCachePath)
         raise Exception(f"No test data found from cache at path{str(testDataCachePath)}")
+
     if checkIfCacheExists(cachePath):
         return fetchFromCache(cachePath)
 
